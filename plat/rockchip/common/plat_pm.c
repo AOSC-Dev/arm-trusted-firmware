@@ -169,14 +169,6 @@ int rockchip_validate_power_state(unsigned int power_state,
 	return PSCI_E_SUCCESS;
 }
 
-void rockchip_get_sys_suspend_power_state(psci_power_state_t *req_state)
-{
-	int i;
-
-	for (i = MPIDR_AFFLVL0; i <= PLAT_MAX_PWR_LVL; i++)
-		req_state->pwr_domain_state[i] = PLAT_MAX_OFF_STATE;
-}
-
 /*******************************************************************************
  * RockChip handler called when a CPU is about to enter standby.
  ******************************************************************************/
@@ -395,7 +387,6 @@ const plat_psci_ops_t plat_rockchip_psci_pm_ops = {
 	.system_reset = rockchip_system_reset,
 	.system_off = rockchip_system_poweroff,
 	.validate_power_state = rockchip_validate_power_state,
-	.get_sys_suspend_power_state = rockchip_get_sys_suspend_power_state
 };
 
 int plat_setup_psci_ops(uintptr_t sec_entrypoint,
